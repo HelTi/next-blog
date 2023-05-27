@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import "highlight.js/styles/atom-one-dark.css";
-import "github-markdown-css/github-markdown.css";
-import DefaultLayout from "../components/layout";
+import DefaultLayout from "@/components/layout";
 import NavHeader from "@/components/NavHeader";
 import PageFooter from "@/components/PageFooter";
 import { useEffect } from "react";

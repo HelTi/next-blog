@@ -3,6 +3,7 @@ import "markdown-navbar/dist/navbar.css";
 import { articelDetail, fetchArticles } from "@/services";
 
 export default function ArticleDetail({ post }) {
+
   return (
     <div className=" flex dark:text-white">
       <div className="article-detail w-0 flex-1 p-4">
@@ -10,7 +11,7 @@ export default function ArticleDetail({ post }) {
           {post.title}
         </h2>
         <div
-          className="markdown-body"
+          className="prose prose-slate dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
       </div>

@@ -49,7 +49,7 @@ export default function NavHeader() {
                 </svg>
               </span>
 
-              <span className="hidden dark:inline cursor-pointer dark:text-slate-400">
+              <span className="hidden dark:inline cursor-pointer dark:text-slate-400 dark:hover:text-slate-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -68,7 +68,7 @@ export default function NavHeader() {
             </div>
 
             <a
-              className="ml-6 block text-base-theme cursor-pointer hover:text-base-theme-100 dark:hover:text-slate-300"
+              className="ml-6 block text-base-theme cursor-pointer hover:text-base-theme-100 dark:hover:text-slate-300 dark:text-slate-400"
               href="https://github.com/HelTi"
             >
               <svg

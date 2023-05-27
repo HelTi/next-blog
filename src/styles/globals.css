@@ -28,7 +28,7 @@ abbr[title] {
   text-decoration: none;
 }
 
-.markdown-body{
+/* .markdown-body{
   background: transparent !important;
 }
 
@@ -38,7 +38,7 @@ abbr[title] {
 
 .dark .markdown-body pre{
   background: #0b0b0b;
-}
+} */
 
 /* 文章目录样式 */
 
