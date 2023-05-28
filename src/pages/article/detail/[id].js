@@ -1,24 +1,8 @@
 import MarkdownNavbar from "markdown-navbar";
 import "markdown-navbar/dist/navbar.css";
 import { articelDetail, fetchArticles } from "@/services";
-// import * as waline from "@waline/client";
-
-import "@waline/client/dist/waline.css";
-import { useEffect, useRef } from "react";
 
 export default function ArticleDetail({ post }) {
-  const commentRef = useRef();
-
-  // useEffect(() => {
-  //   commentRef.current = waline.init({
-  //     el: commentRef.current,
-  //     serverURL: "https://blog-comment-api-six.vercel.app/",
-  //     visitor: true, // 阅读量统计
-  //   });
-
-  //   return () => commentRef.current?.destroy();
-  // }, []);
-
   return (
     <div className=" flex dark:text-white">
       <div className="article-detail w-0 flex-1 p-4">
@@ -29,8 +13,6 @@ export default function ArticleDetail({ post }) {
           className="prose prose-slate dark:prose-invert prose-a:text-blue-600 prose-img:rounded-xl"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
-        {/* 评论 */}
-        <div ref={commentRef}></div>
       </div>
       <div className=" relative hidden w-4/12 sm:hidden md:block">
         <div className="navgation sticky top-12">
