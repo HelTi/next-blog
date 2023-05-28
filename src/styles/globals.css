@@ -8,6 +8,8 @@
   --primary-bg-black: #08080B;
   --primary-font-dark-color:#9BA2AF;
   --primary-blue:#007fff;
+  --waline-theme-color: #715c5c !important;
+  --waline-active-color: #705757 !important;
 }
 
 .dark {

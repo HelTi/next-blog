@@ -1,8 +1,23 @@
 import MarkdownNavbar from "markdown-navbar";
 import "markdown-navbar/dist/navbar.css";
 import { articelDetail, fetchArticles } from "@/services";
+import { init } from "@waline/client";
+
+import "@waline/client/dist/waline.css";
+import { useEffect, useRef } from "react";
 
 export default function ArticleDetail({ post }) {
+  const commentRef = useRef();
+
+  useEffect(() => {
+    commentRef.current = init({
+      el: commentRef.current,
+      serverURL: "https://blog-comment-api-six.vercel.app/",
+      visitor: true, // 阅读量统计
+    });
+
+    return () => commentRef.current?.destroy();
+  }, []);
 
   return (
     <div className=" flex dark:text-white">
@@ -11,20 +26,22 @@ export default function ArticleDetail({ post }) {
           {post.title}
         </h2>
         <div
-          className="prose prose-slate dark:prose-invert prose-img:rounded-xl prose-a:text-blue-600"
+          className="prose prose-slate dark:prose-invert prose-a:text-blue-600 prose-img:rounded-xl"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></div>
+        {/* 评论 */}
+        <div ref={commentRef}></div>
       </div>
       <div className=" relative hidden w-4/12 sm:hidden md:block">
         <div className="navgation sticky top-12">
-          <div className=" text-md text-gray-600 flex items-center mb-1">
+          <div className=" text-md mb-1 flex items-center text-gray-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="h-4 w-4 mr-1"
+              className="mr-1 h-4 w-4"
             >
               <path
                 strokeLinecap="round"
