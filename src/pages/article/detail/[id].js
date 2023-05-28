@@ -1,7 +1,7 @@
 import MarkdownNavbar from "markdown-navbar";
 import "markdown-navbar/dist/navbar.css";
 import { articelDetail, fetchArticles } from "@/services";
-import * as waline from "@waline/client";
+// import * as waline from "@waline/client";
 
 import "@waline/client/dist/waline.css";
 import { useEffect, useRef } from "react";
@@ -9,15 +9,15 @@ import { useEffect, useRef } from "react";
 export default function ArticleDetail({ post }) {
   const commentRef = useRef();
 
-  useEffect(() => {
-    commentRef.current = waline.init({
-      el: commentRef.current,
-      serverURL: "https://blog-comment-api-six.vercel.app/",
-      visitor: true, // 阅读量统计
-    });
+  // useEffect(() => {
+  //   commentRef.current = waline.init({
+  //     el: commentRef.current,
+  //     serverURL: "https://blog-comment-api-six.vercel.app/",
+  //     visitor: true, // 阅读量统计
+  //   });
 
-    return () => commentRef.current?.destroy();
-  }, []);
+  //   return () => commentRef.current?.destroy();
+  // }, []);
 
   return (
     <div className=" flex dark:text-white">
