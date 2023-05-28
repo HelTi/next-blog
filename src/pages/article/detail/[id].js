@@ -1,6 +1,8 @@
 import MarkdownNavbar from "markdown-navbar";
 import "markdown-navbar/dist/navbar.css";
 import { articelDetail, fetchArticles } from "@/services";
+import { timeago } from "@/utils/date";
+import dayjs from "dayjs";
 
 export default function ArticleDetail({ post }) {
   return (
@@ -9,6 +11,28 @@ export default function ArticleDetail({ post }) {
         <h2 className=" mb-4 text-3xl  font-bold dark:text-slate-500">
           {post.title}
         </h2>
+        <div className="article-intro mb-4 flex items-center text-sm text-gray-500">
+          <div className=" flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="mr-1 h-4 w-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            发布时间:
+            <span className=" ml-2 flex items-center">
+              {dayjs(post.create_time).format("YYYY-MM-DD")}
+            </span>
+          </div>
+        </div>
         <div
           className="prose prose-slate dark:prose-invert prose-a:text-blue-600 prose-img:rounded-xl"
           dangerouslySetInnerHTML={{ __html: post.content }}

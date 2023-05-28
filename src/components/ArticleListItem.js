@@ -1,4 +1,4 @@
-import { getTimeDiff } from "@/utils/date";
+import { timeago } from "@/utils/date";
 import Link from "next/link";
 
 export default function ArtilcleListItem(props) {
@@ -29,7 +29,7 @@ export default function ArtilcleListItem(props) {
                 d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <span className="mr-4">发布于{getTimeDiff(post.create_time)}</span>
+            <span className="mr-4">发布于{timeago(post.create_time)}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

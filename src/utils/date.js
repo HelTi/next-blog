@@ -1,25 +1,51 @@
-export const getTimeDiff = (d) => {
-  const timestamp = + new Date(d)
-  const now = new Date().getTime();
-  const timeDiff = now - timestamp;
+// 时间多久格式化
 
-  const minute = 60 * 1000;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const week = day * 7;
-  const year = day * 365;
+export const timeago = function(t) {
+  console.log('t',t, new Date())
+  const timestamp = + new Date(t)/1000
+  let minutes, hours, days, seconds, mouth, year
+  const timeNow = parseInt(new Date().getTime() / 1000)
+  console.log('timestamp timeNow',timestamp,timeNow)
 
-  if (timeDiff < minute) {
-    return "刚刚";
-  } else if (timeDiff < hour) {
-    return Math.floor(timeDiff / minute) + "分钟前";
-  } else if (timeDiff < day) {
-    return Math.floor(timeDiff / hour) + "小时前";
-  } else if (timeDiff < week) {
-    return Math.floor(timeDiff / day) + "天前";
-  } else if (timeDiff < year) {
-    return Math.floor(timeDiff / week) + "周前";
+  seconds = timeNow - timestamp
+  if (seconds > 86400 * 30 * 12) {
+    year = parseInt(seconds / (86400 * 30 * 12))
   } else {
-    return Math.floor(timeDiff / year) + "年前";
+    year = 0
   }
-};
+  if (seconds > 86400 * 30) {
+    mouth = parseInt(seconds / (86400 * 30))
+  } else {
+    mouth = 0
+  }
+  if (seconds > 86400) {
+    days = parseInt(seconds / 86400)
+  } else {
+    days = 0
+  }
+  if (seconds > 3600) {
+    hours = parseInt(seconds / 3600)
+  } else {
+    hours = 0
+  }
+  minutes = parseInt(seconds / 60)
+  if (year > 0) {
+    return year + '年前'
+  } else if (mouth > 0 && year <= 0) {
+    return mouth + '月前'
+  } else if (days > 0 && mouth <= 0) {
+    return days + '天前'
+  } else if (days <= 0 && hours > 0) {
+    return hours + '小时前'
+  } else if (hours <= 0 && minutes > 0) {
+    return minutes + '分钟前'
+  } else if (minutes <= 0 && seconds > 0) {
+    if (seconds < 30) {
+      return '刚刚'
+    } else {
+      return seconds + '秒前'
+    }
+  } else {
+    return '刚刚'
+  }
+}
