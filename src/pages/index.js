@@ -4,11 +4,13 @@ import { fetchArticles, fetchTopArticles } from "@/services";
 import ArtilcleListItem from "@/components/ArticleListItem";
 import ArticleRankingList from "@/components/ArticleRankingList";
 import { useEffect, useState } from "react";
+import Button from "@/components/Button";
 const pageSize = 10;
 export default function Home({ posts, topPosts }) {
   const [articles, setArticles] = useState(posts);
   const [pageNo, setPageNo] = useState(1);
   const [noMoreData, setNoMoreData] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (pageNo > 1) {
@@ -16,6 +18,7 @@ export default function Home({ posts, topPosts }) {
     }
 
     async function getArticles() {
+      setLoading(true)
       const res = await fetchArticles({ pageSize: pageSize, pageNo });
       const posts = res?.data?.data || [];
       if (posts.length) {
@@ -23,6 +26,7 @@ export default function Home({ posts, topPosts }) {
       } else {
         setNoMoreData(true);
       }
+      setLoading(false)
     }
   }, [pageNo]);
 
@@ -45,12 +49,7 @@ export default function Home({ posts, topPosts }) {
             <ArtilcleListItem post={post} key={post.uuid} />
           ))}
         </ul>
-        <div
-          onClick={onLoadNextPageData}
-          className=" cursor-pointer rounded-md bg-white/80 p-2 text-center text-sm text-gray-500 backdrop-blur-sm hover:drop-shadow-sm dark:bg-slate-900"
-        >
-          加载更多
-        </div>
+        <Button  onClick={onLoadNextPageData} loading={loading}>加载更多</Button>
       </div>
       <div className="relative hidden w-4/12 sm:hidden md:block">
         {/* 推荐文章 */}

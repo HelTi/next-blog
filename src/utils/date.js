@@ -1,11 +1,9 @@
 // 时间多久格式化
 
 export const timeago = function(t) {
-  console.log('t',t, new Date())
   const timestamp = + new Date(t)/1000
   let minutes, hours, days, seconds, mouth, year
   const timeNow = parseInt(new Date().getTime() / 1000)
-  console.log('timestamp timeNow',timestamp,timeNow)
 
   seconds = timeNow - timestamp
   if (seconds > 86400 * 30 * 12) {
