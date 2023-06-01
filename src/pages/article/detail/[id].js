@@ -3,10 +3,17 @@ import "markdown-navbar/dist/navbar.css";
 import { articelDetail, fetchArticles } from "@/services";
 import { timeago } from "@/utils/date";
 import dayjs from "dayjs";
+import Head from "next/head";
 
 export default function ArticleDetail({ post }) {
   return (
     <div className=" flex dark:text-white">
+      <Head>
+        <title>
+        {post.title}
+        </title>
+        <meta name="description" content={post.excerpt} />
+      </Head>
       <div className="article-detail w-0 flex-1 p-4">
         <h2 className=" mb-4 text-3xl  font-bold dark:text-slate-500">
           {post.title}

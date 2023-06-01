@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-export default function Button({ loading, children, ...rest }) {
-  const buttonClass = classNames('w-full flex items-center dis justify-center rounded-sm p-2 text-sm text-gray-500 hover:bg-slate-100', { 'cursor-not-allowed': loading });
+export default function Button({ loading, disabled, children, ...rest }) {
+  const buttonClass = classNames('w-full flex items-center justify-center rounded-sm p-2 text-sm text-gray-500 hover:bg-slate-100', { 'cursor-not-allowed': loading || disabled });
   const onClick = ()=>{
     if(rest.loading) return false
     return rest.onClick()
@@ -32,7 +32,7 @@ export default function Button({ loading, children, ...rest }) {
     <button
       className={buttonClass}
       onClick={onClick}
-      disabled = {loading}
+      disabled = {loading || disabled}
       {...rest}
     >
       {loading ? loadingSvg : children}
