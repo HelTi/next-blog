@@ -10,6 +10,8 @@ npm install
 echo "依赖安装结束..."
 echo "开始构建..."
 npm run build
+echo "构建sitemap"
+npm run sitemap
 echo "构建结束 开始启动服务"
 pm2 restart blog-static
 echo "服务重启完毕."
