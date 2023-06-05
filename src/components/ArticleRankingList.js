@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ArticleRankingList({ posts = [] }) {
   return (
-    <div className="max-md sticky top-12 border-b border-gray-100 p-4 dark:border-none dark:border-slate-500">
+    <div className="max-md border-b border-gray-100 p-4 dark:border-none dark:border-slate-500">
       <ul>
         {posts.map((post, index) => (
           <li className="mb-3 flex items-center" key={index}>

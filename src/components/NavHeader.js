@@ -22,10 +22,13 @@ export default function NavHeader() {
           </Link>
         </div>
         <div className="relative hidden lg:flex items-center ml-auto">
-          <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
+          <nav className="text-sm leading-6 font-semibold text-slate-500 dark:text-slate-200">
             <ul className="flex space-x-8">
               <li>
-                <Link className=" dark:text-slate-400" href={"/about"}>关于</Link>
+                <Link className=" dark:text-slate-400 hover:text-blue-400 dark:hover:text-blue-400" href={"/article/page/1"}>文章</Link>
+              </li>
+              <li>
+                <Link className=" dark:text-slate-400 hover:text-blue-400  dark:hover:text-blue-400" href={"/about"}>关于</Link>
               </li>
             </ul>
           </nav>

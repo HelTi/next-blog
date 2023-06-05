@@ -4,6 +4,8 @@ import ArtilcleListItem from "@/components/ArticleListItem";
 import ArticleRankingList from "@/components/ArticleRankingList";
 import { useEffect, useState } from "react";
 import Button from "@/components/Button";
+import ArticleTags from "@/components/ArticleTags";
+import PageFooter from "@/components/PageFooter";
 const pageSize = 10;
 export default function Home({ posts, topPosts }) {
   const [articles, setArticles] = useState(posts);
@@ -22,7 +24,6 @@ export default function Home({ posts, topPosts }) {
       const res = await fetchArticles({ pageSize: pageSize, pageNo });
       const { data } = res;
       const posts = data?.data || [];
-      console.log('res data',res,data,posts)
       // 计算是否是最后一页
       if (data.pageNo >= data.pageTotal) {
         setNoData(true);
@@ -45,24 +46,7 @@ export default function Home({ posts, topPosts }) {
   };
   return (
     <div className=" flex">
-      <div className=" flex-1 border-gray-100">
-        <ul className=" p-2.5">
-          {articles.map((post) => (
-            <ArtilcleListItem post={post} key={post.uuid} />
-          ))}
-        </ul>
-        <Button
-          onClick={onLoadNextPageData}
-          disabled={noData}
-          loading={loading}
-        >
-          {noData ? "没有更多了" : "加载更多"}
-        </Button>
-      </div>
-      <div className="relative hidden w-4/12 sm:hidden md:block">
-        {/* 推荐文章 */}
-        <ArticleRankingList posts={topPosts} />
-      </div>
+        home
     </div>
   );
 }
