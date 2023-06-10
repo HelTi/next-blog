@@ -1,4 +1,5 @@
 import { fetchTags } from "@/services";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function ArticleTags() {
@@ -6,7 +7,7 @@ export default function ArticleTags() {
   useEffect(() => {
     const getTags = async () => {
       const res = await fetchTags();
-      console.log("res", res);
+      // console.log("res", res);
       const { data } = res;
       if (data?.length) {
         setTags(data);
@@ -17,8 +18,8 @@ export default function ArticleTags() {
 
   const TasItem = (props) => {
     return (
-      <div className="tags-item mb-2 mr-2 overflow-hidden flex items-center rounded-md bg-slate-100 dark:bg-slate-700 text-sm text-gray-500 drop-shadow-sm backdrop-blur-sm hover:drop-shadow-lg">
-        <div className=" bg-slate-50 overflow-hidden p-2 dark:bg-slate-600">
+      <div className="tags-item mb-2 mr-2 flex items-center overflow-hidden rounded-md bg-slate-100 text-sm text-gray-500 drop-shadow-sm backdrop-blur-sm hover:drop-shadow-lg dark:bg-slate-700">
+        <div className=" overflow-hidden bg-slate-50 p-2 dark:bg-slate-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -39,10 +40,10 @@ export default function ArticleTags() {
             />
           </svg>
         </div>
-       <div className="p-2">
-       {props.name}
-        <span className="ml-1">[{props.articleCount}]</span>
-       </div>
+        <div className="p-2">
+          {props.name}
+          <span className="ml-1">[{props.articleCount}]</span>
+        </div>
       </div>
     );
   };
@@ -52,11 +53,9 @@ export default function ArticleTags() {
       <div className="tags-inner flex flex-wrap">
         {tags.map((tag) => {
           return (
-            <TasItem
-              name={tag.name}
-              key={tag._id}
-              articleCount={tag.articleCount}
-            />
+            <Link href={`/article/search?tag=${tag.name}`} key={tag._id}>
+              <TasItem name={tag.name} articleCount={tag.articleCount} />
+            </Link>
           );
         })}
       </div>

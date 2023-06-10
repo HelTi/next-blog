@@ -1,12 +1,18 @@
 // import styles from "../styles/Home.module.css";
+import RootLayout2 from "@/components/layout2";
+import TypingEffect from "@/components/TypingEffect";
 import { fetchLatestArticle } from "@/services";
 import Link from "next/link";
+import { useState } from "react";
 export default function Home({ latestPost }) {
-
+  const [text, setText] = useState('Building a better world with love and peace.')
   return (
     <div className="home">
       <div className="relative mx-auto max-w-5xl pt-20 sm:pt-24 lg:pt-32">
-        <div className=" mt-8 flex items-center justify-center text-base-theme">
+        <div className=" text-base-theme text-5xl text-center antialiased font-medium">
+          <TypingEffect text={text} />
+        </div>
+        <div className=" mt-12 flex items-center justify-center text-base-theme">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -42,4 +48,8 @@ export async function getServerSideProps() {
       latestPost
     },
   };
+}
+
+Home.layoutProps = {
+  Layout: RootLayout2
 }

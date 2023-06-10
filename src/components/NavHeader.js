@@ -1,7 +1,11 @@
 import { storage } from "@/utils/local-storage";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function NavHeader() {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
   const toggleThemeDark = () => {
     const theme = storage.getItem("theme");
     if (theme === "dark") {
@@ -12,36 +16,91 @@ export default function NavHeader() {
       document.documentElement.classList.add("dark");
     }
   };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // 阻止默认的表单提交行为
+      // 执行搜索逻辑
+      console.log("searchTerm", searchTerm);
+      handleSearch();
+    }
+  };
+
+  const handleSearch = () => {
+    const searchUrl = `/article/search?title=${encodeURIComponent(
+      searchTerm
+    )}`;
+    router.replace(searchUrl);
+  };
+
   return (
-    <div className="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
-      <div className="nav-header container mx-auto max-w-5xl h-12 flex items-center justify-between">
+    <div className="supports-backdrop-blur:bg-white/60 sticky top-0 z-40 w-full flex-none bg-slate-50 backdrop-blur transition-colors duration-500 dark:border-slate-50/[0.06] dark:bg-transparent lg:z-50 lg:border-b lg:border-slate-900/10">
+      <div className="nav-header container mx-auto flex h-12 max-w-5xl items-center justify-between">
         <div>
           <Link href={"/"}>
             <img className=" h-8" src="/helogo.png" />
           </Link>
         </div>
-        <div className="relative hidden lg:flex items-center ml-auto">
-          <nav className="text-sm leading-6 font-semibold text-slate-500 dark:text-slate-200">
-            <ul className="flex space-x-8">
+        <div className="relative ml-auto hidden items-center lg:flex">
+          <nav className="text-sm font-semibold leading-6 text-slate-500 dark:text-slate-200">
+            <ul className="flex items-center space-x-8">
               <li>
-                <Link className=" dark:text-slate-400 hover:text-blue-400 dark:hover:text-blue-400" href={"/article/page/1"}>文章</Link>
+                <div>
+                  <form className="group relative">
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="pointer-events-none absolute left-3 top-1/2 -mt-2.5 text-base-theme group-focus-within:text-base-theme"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      />
+                    </svg>
+                    <input
+                      className=" w-60 appearance-none rounded-md py-2 pl-10 text-xs text-base-theme placeholder-slate-400 shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-base-theme  dark:ring-black"
+                      type="text"
+                      aria-label="请输入搜索内容"
+                      placeholder="请输入搜索内容"
+                      value={searchTerm}
+                      onChange={(event) => setSearchTerm(event.target.value)}
+                      onKeyPress={handleKeyPress}
+                    ></input>
+                  </form>
+                </div>
               </li>
               <li>
-                <Link className=" dark:text-slate-400 hover:text-blue-400  dark:hover:text-blue-400" href={"/about"}>关于</Link>
+                <Link
+                  className=" hover:text-blue-400 dark:text-slate-400 dark:hover:text-blue-400"
+                  href={"/article/page/1"}
+                >
+                  文章
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className=" hover:text-blue-400 dark:text-slate-400  dark:hover:text-blue-400"
+                  href={"/about"}
+                >
+                  关于
+                </Link>
               </li>
             </ul>
           </nav>
 
-          <div className="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">
+          <div className="ml-6 flex items-center border-l border-slate-200 pl-6 dark:border-slate-800">
             <div className="btn" onClick={toggleThemeDark}>
-              <span className="dark:hidden cursor-pointer">
+              <span className="cursor-pointer dark:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6  stroke-base-theme-100 fill-base-theme"
+                  className="h-6 w-6  fill-base-theme stroke-base-theme-100"
                 >
                   <path
                     strokeLinecap="round"
@@ -51,14 +110,14 @@ export default function NavHeader() {
                 </svg>
               </span>
 
-              <span className="hidden dark:inline cursor-pointer dark:text-slate-400 dark:hover:text-slate-300">
+              <span className="hidden cursor-pointer dark:inline dark:text-slate-400 dark:hover:text-slate-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -70,12 +129,12 @@ export default function NavHeader() {
             </div>
 
             <a
-              className="ml-6 block text-base-theme cursor-pointer hover:text-base-theme-100 dark:hover:text-slate-300 dark:text-slate-400"
+              className="ml-6 block cursor-pointer text-base-theme hover:text-base-theme-100 dark:text-slate-400 dark:hover:text-slate-300"
               href="https://github.com/HelTi"
             >
               <svg
                 viewBox="0 0 16 16"
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="currentColor"
                 aria-hidden="true"
                 data-immersive-translate-effect="1"
