@@ -68,6 +68,10 @@ export default function About() {
               </div>
             </div>
           </div>
+          <div>
+            {/* <img className=" rounded-md"  src="https://github-readme-activity-graph.vercel.app/graph?username=HelTI&bg_color=050505&color=c3b1b1&line=535053&point=7e7c7c&area=true&hide_border=true" /> */}
+            <img className=" rounded-md" src="https://github-readme-activity-graph.vercel.app/graph?username=HelTI&bg_color=ffffff&color=c3b1b1&line=ceb6b9&point=c7b3b3&area=true&hide_border=true" />
+          </div>
         </div>
       </div>
     </>
