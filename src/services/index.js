@@ -68,3 +68,24 @@ export const fetchCommentsByArticle = (_id) => {
 export const fetchLatestArticle = () => {
   return fetch("/article/latest");
 };
+
+/**
+ * 保存访客信息
+ * @returns 
+ */
+export const fetchSaveVistor = ({route_path}) => {
+  return fetch("/visitor/save",{
+    route_path
+  },"post");
+};
+
+/**
+ * 增加文章访问量
+ * @param {*} uuid 
+ * @returns 
+ */
+export const fetchViewArticle = (uuid) => {
+  return fetch(`/article/detail/view/${uuid}`);
+};
+
+

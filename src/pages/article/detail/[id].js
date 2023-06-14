@@ -1,11 +1,19 @@
 import MarkdownNavbar from "markdown-navbar";
 import "markdown-navbar/dist/navbar.css";
-import { articelDetail, fetchArticles } from "@/services";
+import { articelDetail, fetchArticles, fetchViewArticle } from "@/services";
 import { timeago } from "@/utils/date";
 import dayjs from "dayjs";
 import Head from "next/head";
+import { useEffect } from "react";
 
-export default function ArticleDetail({ post }) {
+export default function ArticleDetail({ post,id }) {
+
+  useEffect(()=>{
+     viewArtile()
+     function viewArtile(){
+       fetchViewArticle(id)
+     }
+  },[])
   return (
     <div className=" flex dark:text-white">
       <Head>
@@ -84,5 +92,5 @@ export async function getStaticProps({ params }) {
   const { id } = params;
   const res = await articelDetail(id);
   const post = res.data;
-  return { props: { post } };
+  return { props: { post, id } };
 }
