@@ -6,7 +6,7 @@ export default function About() {
           <div className=" mx-auto h-24 w-24">
             <img
               className=" rounded-full"
-              src="/images/l.png"
+              src="/images/I.jpeg"
               style={{
                 width: "100%",
               }}
